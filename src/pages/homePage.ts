@@ -1,10 +1,8 @@
 import { Locator, Page } from '@playwright/test';
 
-
 interface Locators {
-    getStartedLink: Locator;
-    heading: Locator;
-    headerNavLinks: (linkText: string) => Locator;
+    acceptCookiesButton: Locator;
+    // headerNavLinks: (linkText: string) => Locator;
 }
 
 export class Homepage {
@@ -14,19 +12,20 @@ export class Homepage {
     public locators(): Locators  {
         return {
 
-            getStartedLink: this.page.getByRole("link", { name: "Get Started" }),
+            acceptCookiesButton: this.page.getByRole("button", { name: "Accept" }),
 
-            heading: this.page.getByRole("heading", { name: 'Installation' }),
-
-            headerNavLinks: (linkText: string) => {
-                return this.page.getByRole("heading", { name: '${linkText}' });
-        },
+            // headerNavLinks: (linkText: string) => {
+            //     return this.page.getByRole("heading", { name: `${linkText}` });
+            // }
         };
     }
 
+    public async acceptCookies(): Promise<void> {
+        await this.locators().acceptCookiesButton.click();
+    }
+
     public async navigateToHomePage() : Promise<void> {
-        console.log("Navigating to Home Page: " + process.env.URL);
-        await this.page.goto("https://www.amazon.co.uk/", {
+        await this.page.goto('/', {
             waitUntil: 'domcontentloaded'
         });
     }

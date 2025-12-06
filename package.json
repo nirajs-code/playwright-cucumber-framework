@@ -9,7 +9,7 @@
     "test": "npm run test:e2e",
     "test:cucumberjson": "cucumber-js --config config/cucumber.json",
     "test:playwright": "npx playwright test --project='Google Chrome'",
-    "test:debug": "playwright test --debug",
+    "test:debug": "PWDEBUG=1 cucumber-js --config config/cucumber.js",
     "lint": "eslint \"src/**/*.{ts,js}\"",
     "lint:fix": "eslint \"src/**/*.{ts,js}\" --fix",
     "test:report": "playwright show-report"
